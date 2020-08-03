@@ -54,6 +54,3 @@ def update_korea_db():  # page별 url 가져옴
     print("Ncar_korea_db is updated!!")
     return db
     """
-
-
-update_korea_db()

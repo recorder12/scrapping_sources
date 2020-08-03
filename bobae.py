@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 
-max_Page = 100
+max_Page = 1
 
 
 def update_cyber_db():  # page별 url 가져옴
