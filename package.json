@@ -1,0 +1,32 @@
+{
+  "name": "fakecarstock",
+  "version": "1.0.0",
+  "description": "Matching uploaded image by many images of car stocks on popular sites to prevent people from tricking",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/recorder12/scrapping_sources.git"
+  },
+  "author": "KBG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/recorder12/scrapping_sources/issues"
+  },
+  "homepage": "https://github.com/recorder12/scrapping_sources#readme",
+  "dependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "helmet": "^4.0.0",
+    "morgan": "^1.10.0"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node init.js --delay 2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

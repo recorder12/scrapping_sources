@@ -19,8 +19,18 @@ Python으로 매일 정해진 시각에 db 업데이트
 방법은 node js에서 시간 API를 가져와서 정해진 시각이 된 경우 (새벽 3-4시쯤, 트래픽 적은 때) python 파일 내 함수 돌림 그 결과를
 mongoDB에 업데이트.
 
-
 Googple image 검색 --> 이미지별 teachme 대조
 Bobae db와 일일히 대조
 대조방식을 어떻게 할 것인가
 
+API server 사용 x, node JS + python function 사용하되 내가 수시로 "/admin창으로 들어간 뒤 login, password에 고유 비번 만든 뒤 입력창 만들어 두고 post 했을 때 db update 가동, 그 결과 디스플레이 or console.log
+
+작업 순서 :
+
+1. node js 서버 구축 (50%, pug 구현 필요)
+2. python 함수 연결
+3. MongoDB에 DB 저장
+4. teachMe 적용
+5. Google API 연결
+6. Front-End 형성
+7. Deploy
