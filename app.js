@@ -10,6 +10,7 @@ import { localsMiddleware } from "./middlewares";
 import apiRouter from "./routers/apiRouter";
 import adminRouter from "./routers/adminRouter";
 import userRouter from "./routers/userRouter";
+import { test } from "./controllers/controller";
 
 const app = express();
 
@@ -42,4 +43,5 @@ app.use(localsMiddleware);
 app.use(routes.home, userRouter);
 app.use(routes.api, apiRouter);
 app.use(routes.admin, adminRouter);
+app.get("/test", test);
 export default app;

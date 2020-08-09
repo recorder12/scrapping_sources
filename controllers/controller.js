@@ -1,4 +1,4 @@
-import { teachMe } from "./teachMe";
+import { updateDB } from "./scrapping";
 
 export const home = (req, res) => {
   res.render("homeback2", { PageTitle: "Home" });
@@ -27,3 +27,7 @@ export const postLogin = (req, res) => {
 };
 
 export const postUpdate = (req, res) => {};
+
+export const test = (req, res) => {
+  updateDB();
+};

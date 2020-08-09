@@ -15,9 +15,6 @@ To confirm whether the car is trading or not.
 - [ ] Google API 사용 ? 정확성 떨어짐. API로 이미지를 가져온 후 그걸로 teachme로 대조
 - [ ] 네이버 블로그 API 사용 https://developers.naver.com/docs/search/image/ 정확성 떨어짐. (일단 보류)
 
-Python으로 매일 정해진 시각에 db 업데이트
-방법은 node js에서 시간 API를 가져와서 정해진 시각이 된 경우 (새벽 3-4시쯤, 트래픽 적은 때) python 파일 내 함수 돌림 그 결과를
-mongoDB에 업데이트.
 
 Googple image 검색 --> 이미지별 teachme 대조
 Bobae db와 일일히 대조
