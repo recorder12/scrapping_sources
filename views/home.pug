@@ -1,0 +1,13 @@
+extend layouts/main
+
+block content
+    .form-container
+            .fileUpload
+                lable(for="imageFile") 차량 이미지 업로드(단일)
+                input(type="file", id="car-image", name="imageFile", accept="image/*")
+                img(class="preview-image", id="preview", width="200")
+                input(type="text", placeholder="차량 기종", id="car-model")
+                input(type="submit", id="search" value="이미지 검색")
+            
+
+            // submit 누르면 image 가져와서 다시 img에 보여줌

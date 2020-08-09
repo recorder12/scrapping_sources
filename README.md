@@ -8,7 +8,7 @@ To confirm whether the car is trading or not.
       db = [{"searchSite" : sitename, "db" : [{
       "page_URL" : page_URL, "image_URL" : image_URL, "title" : title"]}]
 - [ ] 엔카 web scrapping { imageURL, pageURL, price}; --> DB에 저장 (보류)
-- [ ] Node.js로 서버 구축
+- [X] Node.js로 서버 구축
 - [ ] MongoDB에 schema 형성
 - [ ] 검수할 이미지 업로드 + 기종 이름 (ex) 소나타 --> title에서 title.find("기종이름") 으로 db에서 간추린 db 가져옴 --> 이걸로 이미지 대조
 - [ ] teachME npm library 사용. https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image --> 업로드 이미지 사이즈, 색채 등 변경하며 교육. 모델 불러온 후 이미지별로 일치율 검사 --> 일치율 90% 이상인 경우 list 형성하여 front에 전달
@@ -27,10 +27,10 @@ API server 사용 x, node JS + python function 사용하되 내가 수시로 "/a
 
 작업 순서 :
 
-1. node js 서버 구축 (50%, pug 구현 필요)
-2. python 함수 연결
-3. MongoDB에 DB 저장
-4. teachMe 적용
-5. Google API 연결
-6. Front-End 형성
+1. node js 서버 구축 (front && AI factor complete)
+2. python 함수 연결 --> JS로 변경 (today)
+3. MongoDB에 DB 저장 --> today
+4. teachMe 적용 (완료)
+5. Google API 연결 
+6. Front-End 형성 (css 추가 구성 필요, admin 부분 구성 필요)
 7. Deploy

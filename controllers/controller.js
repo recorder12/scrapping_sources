@@ -1,23 +1,22 @@
+import { teachMe } from "./teachMe";
+
 export const home = (req, res) => {
-  res.render("home", { PageTitle: "Home" });
+  res.render("homeback2", { PageTitle: "Home" });
 };
 
 export const postSearch = (req, res) => {
   //Uploaded image, car keyword post
+
   const {
-    body: { image, carName },
+    body: { image, carModel },
   } = req;
 };
 
-export const result = (req, res) => {
-  res.render("result", resultList);
-};
-
-export const getAdmin = (req, res) => {
+export const getLogin = (req, res) => {
   res.render("admin");
 };
 
-export const postAdmin = (req, res) => {
+export const postLogin = (req, res) => {
   const {
     body: { password },
   } = req;
@@ -26,3 +25,5 @@ export const postAdmin = (req, res) => {
     start(); // python function
   }
 };
+
+export const postUpdate = (req, res) => {};
