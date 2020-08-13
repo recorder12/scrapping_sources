@@ -28,6 +28,8 @@ export const postLogin = (req, res) => {
 
 export const postUpdate = (req, res) => {};
 
-export const test = (req, res) => {
-  updateDB();
+export const test = async (req, res) => {
+  const db = await updateDB();
+  console.log(db);
+  res.render("test", db);
 };

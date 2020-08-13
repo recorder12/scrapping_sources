@@ -5,16 +5,22 @@ let imgWidth;
 let imgHeight;
 
 const app = async () => {
+  const img = document.getElementById("car-image");
+  const carModel = document.getElementById("car-model").value;
+  if (!img) {
+    prompt("upload car image!!");
+    init();
+    return;
+  }
+  imgWidth = img.width;
+  imgHeight = img.height;
+
   console.log("Loading mobilenet..");
 
   // Load the model.
   net = await mobilenet.load();
   console.log("Successfully loaded model");
   //get image to educate class
-  const img = document.getElementById("car-image");
-  const carModel = document.getElementById("car-model").value;
-  imgWidth = img.width;
-  imgHeight = img.height;
 
   //get activate
   const activation = net.infer(img, true);
