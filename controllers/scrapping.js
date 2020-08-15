@@ -2,9 +2,11 @@ import request from "request";
 import cheerio from "cheerio";
 import fetch from "node-fetch";
 
+// To do : 10 page 완료 후 db에 siteURL 서치, 확인 결과 없으면 계속 진행, 있으면 거기까지 업데이트 후 종료
+
 export const updateDB = async () => {
-  let db = [{ siteName: "BobaeDream" }];
-  const maxPage = 3;
+  let db = [];
+  const maxPage = 2;
 
   for (let page = 1; page < maxPage; page++) {
     let URL = `https://www.bobaedream.co.kr/cyber/CyberCar.php?sel_m_gubun=ALL&page=${page}&order=S11&view_size=70`;
@@ -29,8 +31,6 @@ const getDB = async (URL) => {
     console.log("disconnect error!");
     response = await fetch(URL);
   }
-
-  console.log(response.status);
 
   const body = await response.text();
 
@@ -61,6 +61,7 @@ const getDB = async (URL) => {
       .text();
 
     data = {
+      siteName: "보배드림",
       pageURL: pageURL,
       imageURL: imageURL,
       title: title,

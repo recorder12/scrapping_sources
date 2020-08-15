@@ -1,14 +1,17 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 //Home
 const HOME = "/";
 
 //Api
 const API = "/api";
 const SEARCH = "/search";
-const UPDATE = "/:id/update";
+const UPDATE = `/update`;
 
 //Admin
-const ADMIN = "/admin";
-const LOGIN = "/login";
+const ADMIN = `/${process.env.admin_URL}`;
+//const ADMIN = `/admin`;
 
 const routes = {
   home: HOME,
@@ -16,7 +19,6 @@ const routes = {
   search: SEARCH,
   update: UPDATE,
   admin: ADMIN,
-  login: LOGIN,
 };
 
 export default routes;

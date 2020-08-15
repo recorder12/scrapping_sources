@@ -8,7 +8,6 @@ import routes from "./routes";
 import csp from "helmet-csp";
 import { localsMiddleware } from "./middlewares";
 import apiRouter from "./routers/apiRouter";
-import adminRouter from "./routers/adminRouter";
 import userRouter from "./routers/userRouter";
 import { test } from "./controllers/controller";
 
@@ -42,6 +41,5 @@ app.use(morgan("dev"));
 app.use(localsMiddleware);
 app.use(routes.home, userRouter);
 app.use(routes.api, apiRouter);
-app.use(routes.admin, adminRouter);
-app.get("/test", test);
+
 export default app;

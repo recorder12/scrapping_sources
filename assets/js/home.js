@@ -1,5 +1,5 @@
 const classifier = knnClassifier.create();
-const button = document.getElementById("search");
+const searchButton = document.getElementById("search");
 let net;
 let imgWidth;
 let imgHeight;
@@ -12,6 +12,13 @@ const app = async () => {
     init();
     return;
   }
+
+  if (!carModel) {
+    prompt("Input Car Model!!");
+    init();
+    return;
+  }
+
   imgWidth = img.width;
   imgHeight = img.height;
 
@@ -64,10 +71,12 @@ function getBase64FromImageUrl(url) {
 }
 
 const init = () => {
-  button.addEventListener("click", app);
+  searchButton.addEventListener("click", app);
 };
 
-init();
+if (searchButton) {
+  init();
+}
 
 /*
 
