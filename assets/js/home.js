@@ -1,74 +1,157 @@
-const classifier = knnClassifier.create();
+import axios from "axios";
 const searchButton = document.getElementById("search");
-let net;
-let imgWidth;
-let imgHeight;
+const resultContainer = document.getElementById("jsList");
+const uploadedImg = document.getElementById("car-image");
 
 const app = async () => {
-  const img = document.getElementById("car-image");
   const carModel = document.getElementById("car-model").value;
-  if (!img) {
-    prompt("upload car image!!");
+
+  if (!uploadedImg) {
+    prompt("upload car image!!"); // 추후 수정 input 창이 없게
     init();
     return;
   }
 
-  if (!carModel) {
+  if (!carModel || carModel === "") {
+    // 추후 수정
     prompt("Input Car Model!!");
     init();
     return;
   }
 
-  imgWidth = img.width;
-  imgHeight = img.height;
+  const img1 = uploadedImg.src;
 
-  console.log("Loading mobilenet..");
+  const response = await axios({
+    url: "/api/search",
+    method: "POST",
+    data: {
+      carModel,
+      img1,
+    },
+  });
 
-  // Load the model.
-  net = await mobilenet.load();
-  console.log("Successfully loaded model");
-  //get image to educate class
+  const Lists = await response.data.db;
 
-  //get activate
-  const activation = net.infer(img, true);
-  //clssify the image
-  classifier.addExample(activation, 1);
+  console.log("done!");
+  //console.log(Lists);
 
-  let imageURL =
-    "https://file4.bobaedream.co.kr/direct/2020/07/29/CA14441596001360_1.jpg";
+  // const Lists = [
+  //   {
+  //     pageURL:
+  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
+  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
+  //     imageURL:
+  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
+  //     price: 3000,
+  //   },
+  //   {
+  //     pageURL:
+  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
+  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
+  //     imageURL:
+  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
+  //     price: 3000,
+  //   },
+  //   {
+  //     pageURL:
+  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
+  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
+  //     imageURL:
+  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
+  //     price: 3000,
+  //   },
+  //   {
+  //     pageURL:
+  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
+  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
+  //     imageURL:
+  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
+  //     price: 3000,
+  //   },
+  //   {
+  //     pageURL:
+  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
+  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
+  //     imageURL:
+  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
+  //     price: 3000,
+  //   },
+  //   {
+  //     pageURL:
+  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
+  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
+  //     imageURL:
+  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
+  //     price: 3000,
+  //   },
+  //   {
+  //     pageURL:
+  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
+  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
+  //     imageURL:
+  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
+  //     price: 3000,
+  //   },
+  //   {
+  //     pageURL:
+  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
+  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
+  //     imageURL:
+  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
+  //     price: 3000,
+  //   },
+  // ];
 
-  const img0 = getBase64FromImageUrl(imageURL);
-
-  console.log(img0);
-
-  const x = net.infer(img0, "conv_preds");
-  const result = await classifier.predictClass(x);
-
-  console.log(result.label);
-  console.log(result.confidences[result.label]);
+  displayList(Lists);
+  //searchButton.addEventListener("click", removeList);
 };
 
-function getBase64FromImageUrl(url) {
-  var img = new Image();
+const displayList = (array) => {
+  if (document.getElementById("lists")) {
+    document.getElementById("lists").remove();
+  }
 
-  img.setAttribute("crossOrigin", "anonymous");
+  const lists = document.createElement("div");
+  lists.id = "lists";
+  resultContainer.appendChild(lists);
 
-  img.onload = function () {
-    var canvas = document.createElement("canvas");
-    canvas.width = this.width;
-    canvas.height = this.height;
+  if (array.length === 0) {
+    const noMatch = document.createElement("span");
+    noMatch.className = "noMatch";
+    noMatch.innerHTML = "검색된 결과가 없습니다.";
+    lists.appendChild(noMatch);
+    return;
+  }
 
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(this, 0, 0);
+  array.forEach((element) => {
+    const listsChild = document.createElement("div");
+    const spanBox = document.createElement("div");
+    const link = document.createElement("a");
+    const title = document.createElement("span");
+    const price = document.createElement("span");
+    const image = document.createElement("img");
 
-    var dataURL = canvas.toDataURL("image/png");
-  };
+    listsChild.className = "listsChild";
+    spanBox.className = "spanBox";
+    title.className = "title";
+    price.className = "price";
+    image.className = "image";
 
-  img.src = url;
-  img.width = imgWidth;
-  img.height = imgHeight;
-  return img;
-}
+    title.innerHTML = "글 제목 : " + element.title;
+    price.innerHTML = "가격 : " + element.price + " (만원)";
+    link.href = element.pageURL;
+    link.target = "_blank";
+    image.src = element.imageURL;
+    image.width = 300;
+
+    lists.appendChild(listsChild);
+    listsChild.appendChild(link);
+    link.appendChild(spanBox);
+    link.appendChild(image);
+    spanBox.appendChild(title);
+    spanBox.appendChild(price);
+  });
+};
 
 const init = () => {
   searchButton.addEventListener("click", app);
@@ -77,60 +160,3 @@ const init = () => {
 if (searchButton) {
   init();
 }
-
-/*
-
-
-
-import axios from "axios";
-
-const searchButton = document.getElementById("search");
-const uploadImg = document.getElementById("car-image");
-const inputCar = document.getElementById("car-model");
-const imageFile = document.getElementById("preview");
-
-let carModel = "";
-
-const postImage = async (image, carModel) => {
-  const response = await axios({
-    url: "/api/search",
-    method: "POST",
-    data: {
-      image,
-      carModel,
-    },
-  });
-
-  if ((response.status = 200)) {
-    console.log("searching is done!");
-  }
-};
-
-const handleSubmit = () => {
-  carModel = inputCar.value;
-  console.log(imageFile);
-  console.log(typeof imageFile);
-
-  if (imageFile.src) {
-    postImage(imageFile, carModel);
-  } else {
-    init(); //나중에 플래쉬 메세지 추가. "이미지를 업로드 해주세요"
-    console.log("No image");
-  }
-};
-
-
-const handleImg = (event) => {
-  event.preventDefault();
-  imageFile.src = URL.createObjectURL(event.target.files[0]);
-  console.log(imageFile.src);
-};
-
-const init = () => {
-  searchButton.addEventListener("click", handleSubmit);
-  uploadImg.addEventListener("change", handleImg);
-};
-
-init();
-
-*/

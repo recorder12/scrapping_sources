@@ -2,13 +2,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
-mongoose.connect(
-  process.env.PRODUCTION ? process.env.MONGO_URL_PROD : process.env.MONGO_URL,
-  {
-    useNewUrlParser: true,
-    useFindAndModify: false,
-  }
-);
+mongoose.connect(process.env.MONGO_URL_PROD, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+});
 
 const db = mongoose.connection;
 
@@ -18,3 +15,5 @@ const handleError = (error) =>
 
 db.once("open", handleOpen);
 db.on("error", handleError);
+
+//process.env.PRODUCTION ? process.env.MONGO_URL_PROD : process.env.MONGO_URL,

@@ -6,21 +6,22 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import routes from "./routes";
 import csp from "helmet-csp";
+import cors from "cors";
 import { localsMiddleware } from "./middlewares";
 import apiRouter from "./routers/apiRouter";
 import userRouter from "./routers/userRouter";
-import { test } from "./controllers/controller";
 
 const app = express();
 
 app.use(helmet());
 
 app.use(
+  //csp policy set up
   csp({
     directives: {
       defaultSrc: ["*", "http://localhost:4000"],
       scriptSrc: ["*", "'self'", "'unsafe-inline'", "'unsafe-eval'"],
-      styleSrc: ["'self'"],
+      styleSrc: ["*"],
       imgSrc: ["*", "'self'", "data: http:"],
       connectSrc: ["*", "'self'"],
       objectSrc: ["'none'"],
@@ -30,16 +31,17 @@ app.use(
     reportOnly: false,
   })
 );
+app.use(cors()); //CORS request configure
 
 app.set("view engine", "pug");
 app.use("/static", express.static(path.join(__dirname, "static")));
 app.use(cookieParser());
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(morgan("dev"));
 
 app.use(localsMiddleware);
-app.use(routes.home, userRouter);
-app.use(routes.api, apiRouter);
+app.use(routes.home, cors(), userRouter);
+app.use(routes.api, cors(), apiRouter);
 
 export default app;

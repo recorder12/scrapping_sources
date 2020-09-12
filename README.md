@@ -9,19 +9,18 @@ To confirm whether the car is on trading or not.
       "page_URL" : page_URL, "image_URL" : image_URL, "title" : title"]}]
 - [x] Node.js로 서버 구축
 - [x] MongoDB에 schema 형성
-- [ ] 검수할 이미지 업로드 + 기종 이름 (ex) 소나타 --> title에서 title.find("기종이름") 으로 db에서 간추린 db 가져옴 --> 이걸로 이미지 대조
+- [x] 검수할 이미지 업로드 + 기종 이름 (ex) 소나타 --> title에서 title.find("기종이름") 으로 db에서 간추린 db 가져옴 --> 이걸로 이미지 대조
 - [x] teachME npm library 사용. https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image --> 업로드 이미지 사이즈, 색채 등 변경하며 교육. 모델 불러온 후 이미지별로 일치율 검사 --> 일치율 90% 이상인 경우 list 형성하여 front에 전달
 - [ ] Google API 사용 ? 정확성 떨어짐. API로 이미지를 가져온 후 그걸로 teachme로 대조
 - [ ] 네이버 블로그 API 사용 https://developers.naver.com/docs/search/image/ 정확성 떨어짐. (일단 보류)
-
 
 작업 순서 :
 
 1. node js 서버 구축 (front && AI factor complete) <done>
 2. python 함수 연결 --> JS로 변경 <done>
 3. MongoDB에 DB 저장 <done>
-4. searched DB 가져오는 API 적용 
-5. teachMe 구동 재확인  <done>
+4. searched DB 가져오는 API 적용 <done>
+5. teachMe 구동 재확인 <done>
 6. Google API 연결
 7. Front-End 꾸밈 (css 추가 구성 필요, admin 부분 구성 필요)
 8. Deploy
@@ -33,7 +32,8 @@ db 업데이트 방식 : 보배드림만 우선 스크래핑해서 저장하자.
 3. 추후 siteName별로 collection을 나눔
 4. 매주 혹은 매일 업데이트 하는데 스크래핑을 1페이지부터 되로 가면서 10페이지씩 스크래핑 후 db에 확인. 만일 동일 pageURL이 있으면 거기서 멈춤. 이러면 스크래핑을 최소화 하면서 업데이트 가능
 
-
 8/14 update API 제작 완료
-Next To Do : searched DB 가져오는 API 프론트에서 적용 
+Next To Do : searched DB 가져오는 API 프론트에서 적용
+8/17 pixelmatch npm 패키지로 변경. 이미지 비교. url --> image file.png로 변경하여 비교
 
+server 말고 localhost로 db 업데이트

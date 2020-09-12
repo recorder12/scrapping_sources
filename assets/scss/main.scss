@@ -1,6 +1,8 @@
 body {
   font-family: sans-serif;
   background-color: #eeeeee;
+  width: 80%;
+  margin-left: 10%;
 }
 
 .file-upload {
@@ -113,4 +115,62 @@ body {
 .remove-image:active {
   border: 0;
   transition: all 0.2s ease;
+}
+
+.header__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.input__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.result__container {
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+#lists {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.listsChild {
+  width: 330px;
+  display: flex;
+  justify-content: center;
+  border: 3px soild black;
+  margin-bottom: 30px;
+  margin-right: 20px;
+  background-color: #d8b92fdd;
+}
+
+.spanBox {
+  width: 100%;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+}
+
+.title {
+  margin: 5px;
+}
+
+.price {
+  margin: 5px;
+}
+
+.noMatch {
+  font-size: 18px;
 }

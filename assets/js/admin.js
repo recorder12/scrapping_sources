@@ -7,11 +7,9 @@ const input = document.getElementById("admin__input");
 const returnValue = document.getElementById("return__value");
 
 const postAPI = async () => {
+  console.log("click");
+
   const password = input.value;
-  if (!password) {
-    init();
-    return;
-  }
 
   const response = await axios({
     url: "/api/update",
@@ -31,6 +29,7 @@ const postAPI = async () => {
 const init = () => {
   updateButton.addEventListener("click", postAPI);
 };
+
 if (updateButton) {
   init();
 }
