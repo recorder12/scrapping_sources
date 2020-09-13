@@ -34,6 +34,7 @@ app.use(
 app.use(cors()); //CORS request configure
 
 app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 app.use("/static", express.static(path.join(__dirname, "static")));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));

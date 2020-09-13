@@ -1,8 +1,11 @@
+import "@babel/polyfill";
+import dotenv from "dotenv";
 import "./db";
 import app from "./app";
-import dotenv from "dotenv";
-import "./models/Bobae";
+
 dotenv.config();
+
+import "./models/Bobae";
 
 const PORT = process.env.PORT || 4000;
 
