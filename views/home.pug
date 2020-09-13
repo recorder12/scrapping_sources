@@ -21,7 +21,10 @@ block content
         function removeUpload() {
             $(".file-upload-input").replaceWith($(".file-upload-input").clone());
             $(".file-upload-content").hide();
+            $(".file-upload-content").src = "#";
+            
             $(".image-upload-wrap").show();
+
         }
         $(".image-upload-wrap").bind("dragover", function () {
             $(".image-upload-wrap").addClass("image-dropping");
@@ -39,7 +42,7 @@ block content
             .drag-text
                 h3 Drag and drop a file or select add Image
         .file-upload-content
-            img(class="file-upload-image", id="car-image", src="#", alt="your image", multiple="false", width="200")
+            img(class="file-upload-image", id="car-image", src="", alt="your image", multiple="false", width="200")
             
             .image-title-wrap
                 button(type="button", onclick="removeUpload()", class="remove-image") Remove 

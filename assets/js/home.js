@@ -1,25 +1,29 @@
 import axios from "axios";
 const searchButton = document.getElementById("search");
 const resultContainer = document.getElementById("jsList");
-const uploadedImg = document.getElementById("car-image");
 
 const app = async () => {
+  searchButton.removeEventListener("click", app);
   const carModel = document.getElementById("car-model").value;
-
-  if (!uploadedImg) {
-    prompt("upload car image!!"); // 추후 수정 input 창이 없게
-    init();
-    return;
-  }
-
-  if (!carModel || carModel === "") {
-    // 추후 수정
-    prompt("Input Car Model!!");
-    init();
-    return;
-  }
-
+  const uploadedImg = document.getElementById("car-image");
   const img1 = uploadedImg.src;
+  if (document.getElementById("lists")) {
+    document.getElementById("lists").remove();
+  }
+
+  if (img1 === "http://localhost:4000/") {
+    alert("차량 이미지를 업로드해주세요");
+    init();
+    return;
+  }
+
+  if (!carModel || carModel === "" || carModel === " " || carModel === "  ") {
+    alert("차량 모델명을 입력해주세요");
+    init();
+    return;
+  }
+
+  makeDelay();
 
   const response = await axios({
     url: "/api/search",
@@ -31,82 +35,42 @@ const app = async () => {
   });
 
   const Lists = await response.data.db;
-
   console.log("done!");
-  //console.log(Lists);
-
-  // const Lists = [
-  //   {
-  //     pageURL:
-  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
-  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
-  //     imageURL:
-  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
-  //     price: 3000,
-  //   },
-  //   {
-  //     pageURL:
-  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
-  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
-  //     imageURL:
-  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
-  //     price: 3000,
-  //   },
-  //   {
-  //     pageURL:
-  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
-  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
-  //     imageURL:
-  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
-  //     price: 3000,
-  //   },
-  //   {
-  //     pageURL:
-  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
-  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
-  //     imageURL:
-  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
-  //     price: 3000,
-  //   },
-  //   {
-  //     pageURL:
-  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
-  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
-  //     imageURL:
-  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
-  //     price: 3000,
-  //   },
-  //   {
-  //     pageURL:
-  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
-  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
-  //     imageURL:
-  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
-  //     price: 3000,
-  //   },
-  //   {
-  //     pageURL:
-  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
-  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
-  //     imageURL:
-  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
-  //     price: 3000,
-  //   },
-  //   {
-  //     pageURL:
-  //       "https://www.bobaedream.co.kr//cyber/CyberCar_view.php?no=731075&gubun=I",
-  //     title: "마세라티 르반떼 3.0 S 그란스포츠",
-  //     imageURL:
-  //       "https://file2.bobaedream.co.kr/pds/CyberCar/5/731075/thum5_731075.jpg",
-  //     price: 3000,
-  //   },
-  // ];
-
   displayList(Lists);
-  //searchButton.addEventListener("click", removeList);
+  init();
+};
+
+const makeDelay = () => {
+  const delayBox = document.createElement("div");
+  delayBox.className = "delayBox";
+  delayBox.id = "delayBox";
+
+  const moveBar1 = document.createElement("div");
+  const moveBar2 = document.createElement("div");
+  const moveBar3 = document.createElement("div");
+  const moveBar4 = document.createElement("div");
+  const moveBar5 = document.createElement("div");
+  moveBar1.className = "moving";
+  moveBar2.className = "moving";
+  moveBar3.className = "moving";
+  moveBar4.className = "moving";
+  moveBar5.className = "moving";
+  moveBar1.id = "moveBar1";
+  moveBar2.id = "moveBar2";
+  moveBar3.id = "moveBar3";
+  moveBar4.id = "moveBar4";
+  moveBar5.id = "moveBar5";
+  delayBox.appendChild(moveBar1);
+  delayBox.appendChild(moveBar2);
+  delayBox.appendChild(moveBar3);
+  delayBox.appendChild(moveBar4);
+  delayBox.appendChild(moveBar5);
+  resultContainer.appendChild(delayBox);
 };
 
 const displayList = (array) => {
+  document.getElementById("delayBox").remove();
+
   if (document.getElementById("lists")) {
     document.getElementById("lists").remove();
   }

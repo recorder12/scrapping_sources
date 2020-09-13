@@ -64,8 +64,13 @@ export const postSearchDB = async (req, res) => {
             return res;
           });
       } catch (error) {
-        console.log(error);
         errorCount++;
+        console.log(error);
+        if (cm >= length - errorCount - 1) {
+          console.log("ended!");
+          res.json({ db: Lists });
+          res.end();
+        }
         return false;
       }
 
@@ -74,11 +79,11 @@ export const postSearchDB = async (req, res) => {
           if (err) {
             console.log("An error!");
           }
-          if (data.misMatchPercentage < 30) {
+          if (data.misMatchPercentage < 10) {
             Lists.push(element);
             matchNm++;
           }
-
+          cm++;
           if (cm === length - errorCount - 1) {
             console.log("ended!");
             res.json({ db: Lists });
@@ -89,7 +94,6 @@ export const postSearchDB = async (req, res) => {
               length - errorCount - 1
             } (matching Number : ${matchNm})`
           );
-          cm++;
         });
       } catch (error) {
         if (cm === length - errorCount - 1) {
@@ -98,12 +102,8 @@ export const postSearchDB = async (req, res) => {
           res.end();
         }
         console.log(error);
-        cm++;
       }
     });
-
-    //res.json({ db: Lists }); // API return 결과가 문제있음
-    //res.end();
   } catch (error) {
     console.log(error);
     res.redirect(routes.home);
@@ -112,27 +112,30 @@ export const postSearchDB = async (req, res) => {
 
 //update DB API
 export const postUpdateCommmand = async (req, res) => {
-  const {
-    body: { password },
-  } = req;
+  // const {
+  //   body: { password },
+  // } = req;
 
-  if (password === process.env.admin_Password) {
-    const updateResult = await postUpdateDB();
-    console.log("done!");
+  // if (password === process.env.admin_Password) {
+  //   const updateResult = await postUpdateDB();
+  //   console.log("done!");
 
-    res.json({ text: "update is completed!" });
-    res.end();
-  } else {
-    res.json({ text: "password is incorrect" });
-    res.end();
-  }
+  //   res.json({ text: "update is completed!" });
+  //   res.end();
+  // } else {
+  //   res.json({ text: "password is incorrect" });
+  //   res.end();
+  // }
+
+  const updateResult = await postUpdateDB();
+  console.log("done!");
 };
 
 //Update DB function
 export const postUpdateDB = async (req, res) => {
   console.log("Updating...");
 
-  for (let a = 1; a <= 100; a += 5) {
+  for (let a = 1126; a <= 1165; a += 5) {
     const db = await updateCyber(a);
     console.log(`until ${a + 4}, done!`);
 
@@ -157,7 +160,7 @@ export const postUpdateDB = async (req, res) => {
     });
   }
 
-  for (let a = 1; a <= 100; a += 5) {
+  for (let a = 1; a <= 60; a += 5) {
     const db = await updateKorea(a);
     console.log(`until ${a + 4}, done!`);
 
@@ -182,7 +185,7 @@ export const postUpdateDB = async (req, res) => {
     });
   }
 
-  for (let a = 1; a <= 100; a += 5) {
+  for (let a = 1; a <= 60; a += 5) {
     const db = await updateIncome(a);
     console.log(`until ${a + 4}, done!`);
 
